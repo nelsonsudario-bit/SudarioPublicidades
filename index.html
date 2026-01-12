@@ -1,39 +1,75 @@
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudário Publicidades | Publicidade que traz Resultados</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
-  }
-}
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudário Publicidades | Publicidade que Gera Resultados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-900">
-    <div id="root"></div>
+
+<body class="bg-slate-900 text-white">
+
+<!-- HERO -->
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+  <h1 class="text-4xl md:text-6xl font-bold mb-4">Sudário Publicidades</h1>
+  <p class="text-lg md:text-xl max-w-2xl mb-6">
+    Mais de 30 anos de experiência em rádio, publicidade de rua, mídia digital, painel de LED e rádio interna.
+  </p>
+  <a href="https://wa.me/5567998202450" class="bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded-full">
+    Fale comigo no WhatsApp
+  </a>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="bg-slate-800 py-16 px-6">
+  <h2 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h2>
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+    <div class="bg-slate-700 p-6 rounded-xl">
+      <h3 class="text-xl font-bold mb-2">📢 Carro de Som</h3>
+      <p>Publicidade de rua estratégica, com comprovação por vídeos diários para o cliente.</p>
+    </div>
+
+    <div class="bg-slate-700 p-6 rounded-xl">
+      <h3 class="text-xl font-bold mb-2">📻 Rádio</h3>
+      <p>Anúncios em rádio para clientes de todo o Brasil, com foco em impacto local.</p>
+    </div>
+
+    <div class="bg-slate-700 p-6 rounded-xl">
+      <h3 class="text-xl font-bold mb-2">🖥️ Painel de LED</h3>
+      <p>Painel 6x4m em área central, com vídeos de 10 segundos, até 300 exibições por dia.</p>
+    </div>
+
+    <div class="bg-slate-700 p-6 rounded-xl">
+      <h3 class="text-xl font-bold mb-2">🎙️ Locução Profissional</h3>
+      <p>Gravação de comerciais com voz profissional, pronta para rádio e rua.</p>
+    </div>
+
+    <div class="bg-slate-700 p-6 rounded-xl">
+      <h3 class="text-xl font-bold mb-2">🏪 Rádio Interna</h3>
+      <p>Rádio personalizada para supermercados, farmácias e lojas, via internet.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="bg-slate-900 py-16 px-6">
+  <h2 class="text-3xl font-bold text-center mb-6">Área do Cliente</h2>
+  <p class="text-center max-w-3xl mx-auto mb-8">
+    Aqui você confere os vídeos das campanhas veiculadas diariamente para sua empresa.
+  </p>
+
+  <div class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl text-center">
+    <p class="mb-4">🔒 Acesso individual por cliente</p>
+    <p>Vídeos de 10, 15 ou 20 segundos disponíveis para visualização.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-center py-6">
+  <p>© 2026 – Sudário Publicidades</p>
+</footer>
+
 </body>
 </html>
