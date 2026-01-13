@@ -1,74 +1,133 @@
  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sudário Publicidades | Publicidade que Gera Resultados</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudário Publicidades | Mídia que Gera Resultados</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-slate-900 text-white">
+<body class="bg-slate-900 text-slate-100">
+
+<!-- HEADER -->
+<header class="fixed top-0 w-full bg-black/80 backdrop-blur z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+    <h1 class="font-bold text-xl">Sudário Publicidades</h1>
+    <nav class="space-x-6 hidden md:block">
+      <a href="#servicos" class="hover:text-green-400">Serviços</a>
+      <a href="#clientes" class="hover:text-green-400">Clientes</a>
+      <a href="#contato" class="hover:text-green-400">Contato</a>
+    </nav>
+  </div>
+</header>
 
 <!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-  <h1 class="text-4xl md:text-6xl font-bold mb-4">Sudário Publicidades</h1>
-  <p class="text-lg md:text-xl max-w-2xl mb-6">
-    Mais de 30 anos de experiência em rádio, publicidade de rua, mídia digital, painel de LED e rádio interna.
+<section class="pt-32 pb-20 px-6 text-center bg-gradient-to-b from-slate-900 to-slate-800">
+  <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+    Publicidade que<br>aparece, impacta<br>e gera resultado
+  </h2>
+  <p class="max-w-3xl mx-auto text-lg md:text-xl mb-8 text-slate-300">
+    Há mais de 30 anos no rádio e na publicidade, conectando marcas ao público certo
+    através de mídia de rua, rádio, painéis de LED e soluções digitais.
   </p>
-  <a href="https://wa.me/5567998202450" class="bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded-full">
-    Fale comigo no WhatsApp
+  <a href="https://wa.me/5567998202450" class="inline-block bg-green-500 hover:bg-green-600 text-black font-bold px-8 py-4 rounded-full text-lg">
+    Falar agora no WhatsApp
   </a>
 </section>
 
 <!-- SERVIÇOS -->
-<section class="bg-slate-800 py-16 px-6">
-  <h2 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h2>
-  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+<section id="servicos" class="py-20 px-6 bg-slate-800">
+  <h3 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h3>
+
+  <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
     <div class="bg-slate-700 p-6 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">📢 Carro de Som</h3>
-      <p>Publicidade de rua estratégica, com comprovação por vídeos diários para o cliente.</p>
+      <h4 class="text-xl font-bold mb-2">📢 Carro de Som</h4>
+      <p>
+        Publicidade de rua com estratégia, alcance local e comprovação em vídeo
+        para o cliente acompanhar as veiculações.
+      </p>
     </div>
 
     <div class="bg-slate-700 p-6 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">📻 Rádio</h3>
-      <p>Anúncios em rádio para clientes de todo o Brasil, com foco em impacto local.</p>
+      <h4 class="text-xl font-bold mb-2">📻 Rádio</h4>
+      <p>
+        Anúncios em rádio para empresas de qualquer lugar do Brasil,
+        focados em impacto regional e cidades vizinhas.
+      </p>
     </div>
 
     <div class="bg-slate-700 p-6 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">🖥️ Painel de LED</h3>
-      <p>Painel 6x4m em área central, com vídeos de 10 segundos, até 300 exibições por dia.</p>
+      <h4 class="text-xl font-bold mb-2">🖥️ Painel de LED</h4>
+      <p>
+        Painel de LED 6x4m em área central da cidade.
+        Vídeos de 10 segundos com até 300 exibições diárias.
+      </p>
     </div>
 
     <div class="bg-slate-700 p-6 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">🎙️ Locução Profissional</h3>
-      <p>Gravação de comerciais com voz profissional, pronta para rádio e rua.</p>
+      <h4 class="text-xl font-bold mb-2">🎙️ Locução Profissional</h4>
+      <p>
+        Gravação de comerciais para rádio, carro de som e mídia digital,
+        com voz profissional e linguagem persuasiva.
+      </p>
     </div>
 
     <div class="bg-slate-700 p-6 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">🏪 Rádio Interna</h3>
-      <p>Rádio personalizada para supermercados, farmácias e lojas, via internet.</p>
+      <h4 class="text-xl font-bold mb-2">🏪 Rádio Interna</h4>
+      <p>
+        Rádio personalizada para supermercados, farmácias e lojas,
+        funcionando via internet, com controle total do estúdio.
+      </p>
     </div>
 
   </div>
 </section>
 
 <!-- CLIENTES -->
-<section class="bg-slate-900 py-16 px-6">
-  <h2 class="text-3xl font-bold text-center mb-6">Área do Cliente</h2>
-  <p class="text-center max-w-3xl mx-auto mb-8">
-    Aqui você confere os vídeos das campanhas veiculadas diariamente para sua empresa.
+<section id="clientes" class="py-20 px-6 bg-slate-900">
+  <h3 class="text-3xl font-bold text-center mb-8">Área do Cliente</h3>
+  <p class="text-center max-w-3xl mx-auto mb-12 text-slate-300">
+    Aqui o cliente confere os vídeos das campanhas veiculadas,
+    garantindo transparência e confiança no serviço.
   </p>
 
-  <div class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl text-center">
-    <p class="mb-4">🔒 Acesso individual por cliente</p>
-    <p>Vídeos de 10, 15 ou 20 segundos disponíveis para visualização.</p>
+  <!-- CLIENTE EXEMPLO -->
+  <div class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl">
+    <h4 class="text-xl font-bold mb-2">🎵 Escola de Música Harmonia</h4>
+    <p class="mb-4 text-slate-300">
+      Campanha veiculada em janeiro de 2026 – Carro de Som e Painel de LED.
+    </p>
+
+    <div class="space-y-2">
+      <a href="#" class="block bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded">
+        ▶ Vídeo 10s – Manhã
+      </a>
+      <a href="#" class="block bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded">
+        ▶ Vídeo 15s – Tarde
+      </a>
+      <a href="#" class="block bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded">
+        ▶ Vídeo 20s – Noite
+      </a>
+    </div>
   </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="py-20 px-6 bg-slate-800 text-center">
+  <h3 class="text-3xl font-bold mb-6">Vamos divulgar o seu negócio?</h3>
+  <p class="max-w-2xl mx-auto mb-8 text-slate-300">
+    Entre em contato agora mesmo e descubra como sua empresa pode
+    ganhar mais visibilidade e resultados reais.
+  </p>
+  <a href="https://wa.me/5567998202450" class="inline-block bg-green-500 hover:bg-green-600 text-black font-bold px-8 py-4 rounded-full text-lg">
+    Chamar no WhatsApp
+  </a>
 </section>
 
 <!-- FOOTER -->
 <footer class="bg-black text-center py-6">
-  <p>© 2026 – Sudário Publicidades</p>
+  <p>© 2026 – Sudário Publicidades • Todos os direitos reservados</p>
 </footer>
 
 </body>
