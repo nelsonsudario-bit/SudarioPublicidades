@@ -1,50 +1,210 @@
- <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudário Publicidades | Publicidade que traz Resultados</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-        /* Transições suaves para interações */
-        .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-        }
-    </style>
-    <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.460.0",
-    "@google/genai": "https://esm.sh/@google/genai@1.3.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
-</head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
-    <!-- O React montará o aplicativo aqui -->
-    <div id="root"></div>
+import React, { useState, useEffect } from 'react';
+import { 
+  Menu, X, Phone, ChevronRight, Radio, Play, 
+  CheckCircle2, PlayCircle, Clock, CheckCircle,
+  Wand2, Loader2, Copy, Send, MessageSquare,
+  Instagram, Facebook, Mail, MapPin, Globe,
+  Megaphone, Monitor, Mic2
+} from 'lucide-react';
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, SERVICES, PORTFOLIO } from './constants';
+import { generateAdScript } from './geminiService';
 
-    <!-- Ponto de entrada do aplicativo React (ES Module) -->
-    <script type="module" src="index.tsx"></script>
-</body>
-</html>
+// --- SUB-COMPONENTE: HEADER ---
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { label: 'Serviços', href: '#servicos' },
+    { label: 'Sobre Nós', href: '#sobre' },
+    { label: 'Veiculações', href: '#portfolio' },
+    { label: 'Gerador AI', href: '#ai-helper' },
+  ];
+
+  return (
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'}`}>
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="flex flex-col">
+          <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled ? 'text-blue-900' : 'text-white'}`}>SUDÁRIO</span>
+          <span className={`text-[10px] font-bold tracking-[0.2em] -mt-1 ${scrolled ? 'text-blue-600' : 'text-blue-200'}`}>PUBLICIDADES</span>
+        </div>
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.href} className={`font-semibold hover:text-blue-500 transition-colors ${scrolled ? 'text-slate-700' : 'text-white'}`}>{item.label}</a>
+          ))}
+          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center gap-2 bg-green-600 text-white px-5 py-2.5 rounded-full font-bold hover:bg-green-700 transition-all transform hover:scale-105">
+            <Phone size={18} /> {WHATSAPP_DISPLAY}
+          </a>
+        </nav>
+        <button className={`lg:hidden p-2 rounded-lg ${scrolled ? 'text-slate-900' : 'text-white'}`} onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+      {isOpen && (
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl p-6 flex flex-col gap-4">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.href} className="text-lg font-bold text-slate-800" onClick={() => setIsOpen(false)}>{item.label}</a>
+          ))}
+          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="bg-green-600 text-white p-4 rounded-xl font-bold flex items-center justify-center gap-2">
+            <Phone size={20} /> WhatsApp
+          </a>
+        </div>
+      )}
+    </header>
+  );
+};
+
+// --- SUB-COMPONENTE: HERO ---
+const Hero = () => (
+  <section className="relative min-h-screen flex items-center justify-center bg-gradient-primary overflow-hidden pt-20">
+    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px] -mr-96 -mt-96"></div>
+    <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+      <div className="flex-1 text-center lg:text-left">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xs mb-6 uppercase tracking-widest">
+          Especialista em Mídia de Impacto
+        </div>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6">
+          Publicidade que faz sua marca <span className="text-blue-500">aparecer</span> e vender mais
+        </h1>
+        <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
+          Rádio, carro de som, painel de LED e locução profissional para empresas que buscam resultados reais.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-blue-900/40">
+            👉 Fale agora no WhatsApp <ChevronRight />
+          </a>
+          <a href="#portfolio" className="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2">
+            <Play size={20} fill="white" /> Ver Veiculações
+          </a>
+        </div>
+      </div>
+      <div className="flex-1 hidden lg:block relative">
+        <div className="bg-slate-800 p-4 rounded-3xl border border-white/10 shadow-2xl overflow-hidden aspect-video">
+          <img src="https://picsum.photos/seed/advertising/800/450" alt="Mídia" className="w-full h-full object-cover rounded-2xl" />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// --- COMPONENTE PRINCIPAL: APP ---
+const App: React.FC = () => {
+  const [business, setBusiness] = useState('');
+  const [goal, setGoal] = useState('Promoção');
+  const [tone, setTone] = useState('Persuasivo');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<{ script: string; headline: string; duration: string } | null>(null);
+
+  const handleGenerate = async () => {
+    if (!business) return;
+    setLoading(true);
+    try {
+      const data = await generateAdScript({ business, goal, tone });
+      setResult(data);
+    } catch (e) {
+      alert("Erro ao gerar roteiro.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <Hero />
+      
+      {/* Stats */}
+      <section className="bg-blue-600 py-12 text-center text-white">
+        <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div><div className="text-4xl font-black">30+</div><div className="text-xs font-bold uppercase tracking-widest opacity-80">Anos de Mercado</div></div>
+          <div><div className="text-4xl font-black">10k+</div><div className="text-xs font-bold uppercase tracking-widest opacity-80">Veiculações</div></div>
+          <div><div className="text-4xl font-black">100%</div><div className="text-xs font-bold uppercase tracking-widest opacity-80">Transparência</div></div>
+          <div><div className="text-4xl font-black">500+</div><div className="text-xs font-bold uppercase tracking-widest opacity-80">Cidades</div></div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="servicos" className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-16">Nossas <span className="text-blue-600">Soluções</span></h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {SERVICES.map((s) => (
+              <div key={s.id} className="p-8 bg-slate-50 rounded-3xl border border-slate-200 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-blue-600">{s.icon}</div>
+                <h3 className="text-xl font-bold mb-4">{s.title}</h3>
+                <p className="text-slate-600 mb-6">{s.description}</p>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-blue-600 font-bold hover:underline flex items-center gap-2">Saiba mais <ChevronRight size={16}/></a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI Assistant */}
+      <section id="ai-helper" className="py-24 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-slate-900 rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+            <div className="p-10 flex-1 border-b md:border-b-0 md:border-r border-white/10">
+              <h2 className="text-2xl font-black text-white mb-6">Gerador de Roteiro <span className="text-blue-500">IA</span></h2>
+              <input type="text" placeholder="Nome da empresa" value={business} onChange={e => setBusiness(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white mb-4"/>
+              <select value={goal} onChange={e => setGoal(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white mb-4">
+                <option value="Promoção" className="bg-slate-900">Promoção de Vendas</option>
+                <option value="Inauguração" className="bg-slate-900">Inauguração</option>
+                <option value="Institucional" className="bg-slate-900">Institucional</option>
+              </select>
+              <button onClick={handleGenerate} disabled={loading} className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2">
+                {loading ? <Loader2 className="animate-spin"/> : <Wand2/>} Criar Roteiro
+              </button>
+            </div>
+            <div className="p-10 flex-1 bg-slate-800/50 flex flex-col justify-center text-slate-300">
+              {result ? (
+                <div>
+                  <h4 className="text-blue-400 font-bold mb-2">{result.headline}</h4>
+                  <p className="italic text-lg mb-6 leading-relaxed">"{result.script}"</p>
+                  <button onClick={() => {navigator.clipboard.writeText(result.script); alert("Copiado!");}} className="text-sm font-bold flex items-center gap-2 text-white/50 hover:text-white"><Copy size={16}/> Copiar Roteiro</button>
+                </div>
+              ) : (
+                <p className="text-center opacity-50">Preencha os dados para gerar seu roteiro comercial em segundos.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer id="sobre" className="bg-slate-950 text-white py-16">
+        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+          <div className="col-span-2">
+            <h4 className="text-2xl font-black mb-6">SUDÁRIO PUBLICIDADES</h4>
+            <p className="text-slate-500 max-w-md">Especialistas em mídia urbana e sonora com mais de 30 anos de história. Sua marca onde o público está.</p>
+          </div>
+          <div>
+            <h5 className="font-bold mb-6">Contato</h5>
+            <p className="text-slate-500">{WHATSAPP_DISPLAY}</p>
+            <p className="text-slate-500">contato@sudariopublicidades.com.br</p>
+          </div>
+          <div>
+            <h5 className="font-bold mb-6">Siga-nos</h5>
+            <div className="flex gap-4">
+              <Instagram className="cursor-pointer hover:text-blue-500"/>
+              <Facebook className="cursor-pointer hover:text-blue-500"/>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* FAB */}
+      <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform animate-bounce">
+        <MessageSquare size={32}/>
+      </a>
+    </div>
+  );
+};
+
+export default App;
